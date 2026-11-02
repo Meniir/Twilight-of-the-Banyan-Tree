@@ -47,35 +47,8 @@
 }
 
 /* Top-Right Corner [X] Button on the Newspaper */
-.newspaper-corner-close {
-    position: absolute !important;
-    top: 6px !important;
-    right: 6px !important;
-    width: 20px !important;
-    height: 18px !important;
-    min-width: 20px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background-color: var(--win95-bg) !important;
-    color: #000000 !important;
-    font-size: 11px !important;
-    font-weight: bold !important;
-    line-height: 16px !important;
-    text-align: center !important;
-    box-shadow: var(--bevel-raised) !important;
-    cursor: pointer !important;
-    z-index: 20;
-}
 
-.newspaper-corner-close:hover {
-    background-color: #DCDCDC !important;
-}
 
-.newspaper-corner-close:active {
-    box-shadow: var(--bevel-sunken) !important;
-    padding-top: 1px !important;   /* same 1px nudge as .win95-close-btn */
-    padding-left: 1px !important;
-}
 
 .newspaper-top-trim {
     border-top: 2px solid #1A1A1A;

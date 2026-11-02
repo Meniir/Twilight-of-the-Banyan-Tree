@@ -12,7 +12,7 @@ let helpedRaisSpeaker = false;
 let unlockedAchievements = loadUnlockedAchievements();
 let ACHIEVEMENTS = [];
 
-// Final Appeals, one per faction that has one. They are only open on the last three turns, so a run can use at most three.
+// Final Appeals, one per faction that has one. They are open on the last two action turns (the Speech and the Night of the Long Knives), one per turn, so a run can use at most two.
 const FINAL_APPEAL_IDS = ['tni_final_appeal', 'golkar_final_appeal', 'loyalist_final_stand', 'pdip_final_appeal', 'axis_final_deal', 'others_final_appeal', 'daerah_final_appeal', 'golongan_final_appeal'];
 
 // True if every listed decree is enacted / every listed routine action was used at least once.
@@ -29,7 +29,7 @@ function checkAchievements() {
     }
 
     if (['medium', 'high', 'historical'].includes(selectedDifficulty)) {
-        if (stats.pop >= 100) unlockAchievement('pop_max');
+        if (stats.pop >= 90) unlockAchievement('pop_max');
         if (stats.cendana <= 0) unlockAchievement('cendana_zero');
         if (factions['pdip'] && factions['pdip'].affinity >= 100) unlockAchievement('pdip_max');
         if (stats.stab >= 90) unlockAchievement('aman_terkendali');
@@ -92,7 +92,7 @@ function checkAchievements() {
     }
 
     // Faction play: the finale telephone calls and banked Favors.
-    if (FINAL_APPEAL_IDS.filter(id => completedInteractions[id]).length >= 3) {
+    if (FINAL_APPEAL_IDS.filter(id => completedInteractions[id]).length >= 2) {
         unlockAchievement('halo_halo_senayan');
     }
     if (Object.keys(factions).filter(k => (factions[k].favor || 0) >= 1).length >= 6) {

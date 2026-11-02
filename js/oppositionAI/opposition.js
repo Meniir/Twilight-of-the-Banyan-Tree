@@ -15,7 +15,7 @@
             easy:       { moodSwing: 6,  wildcardChance: 0.25, wildcardMin: 12, wildcardMax: 25, crossoverRate: 0.12 },
             medium:     { moodSwing: 8,  wildcardChance: 0.35, wildcardMin: 15, wildcardMax: 35, crossoverRate: 0.20 },
             high:       { moodSwing: 10, wildcardChance: 0.45, wildcardMin: 18, wildcardMax: 45, crossoverRate: 0.28 },
-            historical: { moodSwing: 12, wildcardChance: 1.5, wildcardMin: 25, wildcardMax: 50, crossoverRate: 0.55 }
+            historical: { moodSwing: 12, wildcardChance: 1.0, wildcardMin: 25, wildcardMax: 50, crossoverRate: 0.55 }
         }
     };
 
@@ -169,35 +169,6 @@
         return out;
     }
 
-    // Hook hit before effects are applied; returns a snapshot for afterEffects.
-    function beforeEffects() {
-        return {
-            pdip: active('pdip') ? factions.pdip.affinity : null,
-            pt: active('poros_tengah') ? factions.poros_tengah.affinity : null
-        };
-    }
-    // Hook run after effects are applied; no rivalry echo is active.
-    function afterEffects(_snap) {}
-
-    // Hook for extra decree requirements from the opposition; none are active yet.
-    function getDecreeGateFailures(_decree) { return []; }
-
-    // Faction leverage override hook; returns null while disabled.
-    function getLeverageOverride(_factionKey) { return null; }
-
-    // Faction interaction backfire hook; effects disabled.
-    function evaluateFactionInteraction(_factionKey, _interactionId, _timesUsed) {
-        return {
-            isThreatBurned: false,
-            isKiemasDulled: false,
-            suppressLeverage: false,
-            cancelFactionGain: false,
-            overrideAlertMsg: null,
-            appendAlertMsg: null,
-            abortTurnAdvance: false
-        };
-    }
-
     // End-of-turn opposition step: module steps (incidents, meters), grievance changes, coalition tension and Cendana tracking.
     function onEndOfTurn() {
         if (!gameStarted) return;
@@ -348,9 +319,8 @@
         return locked;
     }
 
-    // Checks the quorum when factions are banned (a majority of the original seats must vote yes).
+    // The vote only carries with a majority of the ORIGINAL chamber (351 of 700), even when banned factions have shrunk the seated chamber.
     function meetsQuorum(forVotes) {
-        if (Object.keys(bannedFactions || {}).filter(k => bannedFactions[k]).length === 0) return true;
         let orig = 0;
         for (const k in initialFactionsSnapshot) orig += (initialFactionsSnapshot[k].seats || 0);
         return forVotes >= Math.floor(orig / 2) + 1;
@@ -364,10 +334,8 @@
     // Unlocks the opposition-related achievements after a winning vote.
     function achievementsOnWin() {
         if (typeof unlockAchievement !== 'function') return;
-        if (state.crisis) unlockAchievement('crisis_survivor');
         if (engine.isPdipLocked()) unlockAchievement('kaos_merah');
         if (typeof engine.getMilitaryMeter === 'function' && engine.getMilitaryMeter().live && !engine.isMilitaryBroken()) unlockAchievement('ngopi_dulu');
-        if (state.incidentCount >= 12) unlockAchievement('under_siege');
         if (active('pdip') && active('poros_tengah') && state.coalitionTicks >= 2 &&
             factions.pdip.affinity >= 70 && factions.poros_tengah.affinity >= 70) {
             unlockAchievement('odd_bedfellows');
@@ -412,16 +380,11 @@
         reset,
         getState,
         restoreState,
-        getDecreeGateFailures,
-        getLeverageOverride,
-        evaluateFactionInteraction,
         onEndOfTurn,
         onEventChoice,
         onDecreeEnacted,
         flushPopups,
         getCendanaWhipNoteHTML,
-        beforeEffects,
-        afterEffects,
         snapshotSeats,
         recordSeatTransfer,
         getBetrayalPressure,

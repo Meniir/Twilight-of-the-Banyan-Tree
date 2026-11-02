@@ -20,7 +20,7 @@ window.saveCampaignState = function() {
             isActionPhase,
             globalMalus,
             selectedDifficulty,
-            ucnActive: window.ucnActive || null,
+            ucnActive: window.sssActive || null,
             showOptionEffects,
             actionCooldowns,
             actionUsageCount,
@@ -92,8 +92,8 @@ window.continueSavedCampaign = async function() {
     isActionPhase = Boolean(data.isActionPhase);
     globalMalus = Number(data.globalMalus) || 0;
     selectedDifficulty = data.selectedDifficulty || selectedDifficulty;
-    window.ucnActive = null;
-    if (selectedDifficulty === 'ucn' && window.UCN) UCN.restoreRun(data.ucnActive);
+    window.sssActive = null;
+    if (selectedDifficulty === 'ucn' && window.SSS) SSS.restoreRun(data.ucnActive);
     if (typeof data.showOptionEffects === 'boolean') showOptionEffects = data.showOptionEffects;
 
     actionCooldowns = data.actionCooldowns || {};

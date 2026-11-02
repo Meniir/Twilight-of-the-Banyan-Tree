@@ -47,7 +47,7 @@ window.showLibraryMenu = function(category = null, preserveScroll = false) {
 
     html += `<div class="library-controls-box">
         <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px; width: 100%;">
-            <input type="text" id="library-search-input" class="library-search-input" style="width: 100%; flex: 1;" placeholder="${escapeAttr(LOC('library.search_placeholder'))}" value="${escapeAttr(currentLibrarySearch)}" oninput="filterLibraryEntries(this.value)">
+            <input type="text" id="library-search-input" class="library-search-input" style="width: 100%; flex: 1;" placeholder="${escapeHtml(LOC('library.search_placeholder'))}" value="${escapeHtml(currentLibrarySearch)}" oninput="filterLibraryEntries(this.value)">
             <button style="width: auto; display: inline-block; --py: 4px; --px: 12px; margin: 0; font-size: 11px; text-align: center; flex-shrink: 0;" onclick="clearLibrarySearch()">${LOC('library.clear')}</button>
         </div>
         <div style="text-align: center; border-top: 1px solid #808080; padding-top: 6px;">`;
@@ -117,7 +117,7 @@ function renderLibraryEntriesHTML() {
     });
 
     if (filtered.length === 0) {
-        return `<div class="faction-summary" style="text-align: center; font-style: italic; color: #555;">${LOC('library.no_match', { QUERY: escapeAttr(currentLibrarySearch), CATEGORY: LOC('library.category.' + currentLibraryCategory) })}</div>`;
+        return `<div class="faction-summary" style="text-align: center; font-style: italic; color: #555;">${LOC('library.no_match', { QUERY: escapeHtml(currentLibrarySearch), CATEGORY: LOC('library.category.' + currentLibraryCategory) })}</div>`;
     }
 
     let html = `<div style="font-size: 11px; color: #444; margin-bottom: 6px; text-align: right;">${LOC(filtered.length === 1 ? 'library.showing_one' : 'library.showing_many', { COUNT: filtered.length })}</div>`;
@@ -139,11 +139,11 @@ function renderLibraryEntriesHTML() {
             ? `<div style="font-size: 10px; font-style: italic; color: #555; margin-top: 4px;">${showAlt ? LOC('library.portrait_hint_back') : LOC('library.portrait_hint', { TITLE: altTitle })}</div>`
             : '';
         const portraitAttrs = alt
-            ? ` style="cursor: pointer;" title="${escapeAttr(showAlt ? LOC('library.portrait_hint_back') : LOC('library.portrait_hint', { TITLE: altTitle }))}" onclick="toggleLibraryAlt(${idx})"`
+            ? ` style="cursor: pointer;" title="${escapeHtml(showAlt ? LOC('library.portrait_hint_back') : LOC('library.portrait_hint', { TITLE: altTitle }))}" onclick="toggleLibraryAlt(${idx})"`
             : '';
         const hasPortrait = Boolean(item.image || normCat === 'persons' || normCat === 'presidents');
         const imgSrc = item.image || '';
-        const shortLabel = escapeAttr((term || LOC('library.photo_fallback')).split('(')[0].trim().toUpperCase());
+        const shortLabel = escapeHtml((term || LOC('library.photo_fallback')).split('(')[0].trim().toUpperCase());
 
         if (hasPortrait) {
             html += `<div class="library-entry-card library-entry-with-portrait">

@@ -81,7 +81,7 @@ function buildStateCardHTML(sum) {
             <div style="flex: 0 0 auto; margin: 0 auto; text-align: center;">
                 <div class="player-portrait-container" style="cursor: default;">
                     <span style="color: #555;">${LOC('player.photo_placeholder')}</span>
-                    <img src="${escapeAttr(getPresidentPortraitSrc())}" class="portrait-img" alt="${escapeAttr(LOC('player.portrait_alt'))}" onerror="this.style.display='none'">
+                    <img src="${escapeHtml(getPresidentPortraitSrc())}" class="portrait-img" alt="${escapeHtml(LOC('player.portrait_alt'))}" onerror="this.style.display='none'">
                 </div>
                 <div style="font-size: 13px; font-weight: bold;">${LOC('player.title')}</div>
                 <div style="font-size: 13px; font-weight: bold;">${LOC('player.full_name')}<br><span style="font-size: 11px; font-weight: normal; color: var(--win95-text-dim);">${LOC('player.office')}</span></div>
@@ -95,7 +95,7 @@ function buildStateCardHTML(sum) {
                     <div class="mpr-tug-for" style="width: ${pct(sum.forVotes)}%;"></div>
                     <div class="mpr-tug-blank" style="width: ${pct(sum.blankVotes)}%;"></div>
                     <div class="mpr-tug-against" style="width: ${pct(sum.againstVotes)}%;"></div>
-                    <div class="mpr-majority-marker" title="${escapeAttr(LOC('election.majority_marker'))}"></div>
+                    <div class="mpr-majority-marker" title="${escapeHtml(LOC('election.majority_marker'))}"></div>
                 </div>
                 <div class="mpr-hemicycle-wrap">
                     ${dots}

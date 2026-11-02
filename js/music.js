@@ -273,7 +273,7 @@ function setupMusicPlayer() {
         if (playableIndices().length > 1) {
             trackHistory.push(currentTrackIndex);
             loadTrackByIndex(getRandomTrackIndex(currentTrackIndex), true);
-        } else if (musicTracks.length === 1) {
+        } else if (playableIndices().length === 1) {
             audio.currentTime = 0;
             audio.play().catch(() => {});
         }

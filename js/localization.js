@@ -223,7 +223,12 @@
         Object.keys(DOM_ATTRS).forEach(attr => {
             scope.querySelectorAll('[' + attr + ']').forEach(el => el.setAttribute(DOM_ATTRS[attr], toPlainText(LOC(el.getAttribute(attr)))));
         });
-        if (!root && LOC.has('app.title')) document.title = toPlainText(LOC('app.title'));
+        if (!root && LOC.has('app.title')) {
+            const title = toPlainText(LOC('app.title'));
+            document.title = title;
+            // The in-page title bar reads this variable, so it follows the selected language
+            document.documentElement.style.setProperty('--app-title', JSON.stringify(title));
+        }
     };
 
     // Lists the languages from languages.json as { code, name, folder, flag, enabled }.

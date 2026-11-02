@@ -1,5 +1,23 @@
 [
   {
+    "version": "0.2.1",
+    "date": "2 November 2026",
+    "title": "Beta 0.2.1 Hotfix",
+    "notes": [
+      "Pembaruan ini menambahkan interaksi Golkar yang masih eksperimental, antarmuka seluler yang dirombak, serta memperbaiki daftar panjang bug permainan, pencapaian yang tidak sesuai, dan sisa-sisa kode lama.",
+
+      "<b>KONTEN BARU</b><ul><ul><li>Layar fraksi Golkar kini menampilkan tiga huruf besar, <b>A</b> (ABRI), <b>B</b> (Birokrasi), dan <b>G</b> (Golkar). Ketuk sebuah huruf untuk membaca penjelasannya dan dekret apa yang mematahkannya.</li></ul></ul>",
+
+      "<b>KAMPANYE BARU:</b><ul><ul><li>Setelah memilih tingkat kesulitan, layar <i>Situasi Saat Ini</i> sekarang menanyakan apakah Anda ingin membaca laporan lengkap (<i>\"Saya ingin tahu apa yang terjadi!!\"</i>) atau langsung memulai (<i>\"Langsung main saja!\"</i>).</li></ul></ul>",
+
+      "<b>SELULER</b><ul><ul><li>Berbagai macam perbaikan dan peningkatan..</li></ul></ul>",
+
+      "<b>PERBAIKAN GAMEPLAY</b><ul><ul><li><b>BANDING AKHIR:</b> Kini terbuka pada Pidato Pertanggungjawaban dan Malam Pisau Panjang, tidak lagi terikat pada giliran terakhir yang tidak punya fase aksi. <i>Halo, Halo Senayan</i> sekarang membutuhkan dua Banding Akhir, jumlah terbanyak yang bisa dipakai dalam satu permainan.</li><li><b>KEMENANGAN:</b> Memenangkan pemungutan suara kini selalu membutuhkan <b>351 dari 700</b> suara, meskipun ada fraksi yang dilarang.</li><li><b>MILITER:</b> Efek yang mencantumkan <i>mil</i> sekaligus <i>abri</i> tidak lagi diterapkan keduanya (efeknya tidak lagi berlaku dua kali lipat).</li><li><b>DEKRET:</b> Dekret yang saling meniadakan kini saling memblokir dari kedua arah.</li><li><b>PENCAPAIAN:</b> <i>Suara Rakyat</i> kini terbuka pada tingkat popularitas \"Tolerated\" sesuai namanya.</li></ul></ul>",
+
+      "<b>PERBAIKAN:</b> Memperbaiki pemutar musik yang tidak mengulang saat hanya ada satu lagu dalam sebuah genre, dan nama gaya yang salah ketik pada kertas hasil pemungutan suara. Kode lama dihapus."
+    ]
+  },
+  {
     "version": "0.2 <i>\"Rekayasa Politik\"</i>",
     "date": "30 Oktober 2026",
     "title": "Beta 0.2 \"Rekayasa Politik\"",

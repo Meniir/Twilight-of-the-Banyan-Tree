@@ -86,7 +86,7 @@ body {
 
 /* Main Window Title Bar */
 .container::before {
-    content: "Twilight of the Banyan Tree";
+    content: var(--app-title, "Twilight of the Banyan Tree");
     display: block;
     background: linear-gradient(90deg, var(--win95-navy) 0%, var(--win95-blue-grad) 100%);
     color: #FFFFFF;
@@ -734,13 +734,6 @@ button.music-ctrl-btn {
 /* ========================================== */
 /* --- ACHIEVEMENTS & TOAST WINDOW        --- */
 /* ========================================== */
-.achievements-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 5px;
-    margin-bottom: 10px;
-}
 
 #achievement-toast {
     bottom: 38px !important; /* above the taskbar; mobile breakpoint overrides below */
@@ -1393,12 +1386,6 @@ html[data-seat-shape="circle"] .mpr-seat-dot {
     margin-bottom: 3px;
 }
 
-.whip-clipboard-box {
-    background-color: var(--win95-bg);
-    box-shadow: var(--bevel-raised);
-    padding: 5px;
-    margin-bottom: 10px;
-}
 
 .state-gazette-box {
     background-color: var(--win95-surface);
@@ -1852,7 +1839,6 @@ html[data-seat-shape="circle"] .mpr-seat-dot {
 }
 
 .mobile-panel-toggle-btn {
-    display: none;
     width: 100%;
     text-align: center !important;
     font-size: 11px !important;
@@ -1862,6 +1848,11 @@ html[data-seat-shape="circle"] .mpr-seat-dot {
     background: linear-gradient(90deg, var(--win95-navy) 0%, var(--win95-blue-grad) 100%) !important;
     color: #FFFFFF !important;
     text-shadow: 1px 1px 0px #000000;
+}
+
+/* The collapse toggle only exists on narrow screens (the mobile block above shows it); defined after the base rule so it cannot be overridden by it. */
+@media (min-width: 821px) {
+    .mobile-panel-toggle-btn { display: none; }
 }
 
 /* ========================================== */
@@ -2349,16 +2340,6 @@ button.active-depressed:active:not(:disabled) {
     font-weight: normal;
 }
 
-.settings-swatch-btn {
-    width: auto !important;
-    display: inline-flex;
-    align-items: center;
-    --py: 5px;
-    --px: 9px;
-    margin: 0 !important;
-    font-size: 11.5px !important;
-    font-weight: normal;
-}
 
 .settings-color-dot {
     width: 11px;
@@ -2421,46 +2402,10 @@ button.active-depressed:active:not(:disabled) {
 }
 
 /* Proton Mail Purple */
-.brand-btn-proton {
-    background-color: #6D4AFF !important;
-    color: #FFFFFF !important;
-}
-.brand-btn-proton:hover {
-    background-color: #5B37EB !important;
-}
 
 /* --- Feedback Telex Box --- */
-.settings-feedback-box {
-    background-color: var(--win95-well-alt);
-    box-shadow: var(--bevel-sunken);
-    padding: 10px;
-    margin-top: 6px;
-}
 
-.settings-select {
-    background-color: var(--win95-window);
-    color: var(--win95-text);
-    border: none;
-    box-shadow: var(--bevel-sunken);
-    padding: 3px 6px;
-    font-size: 12px;
-    margin-left: 4px;
-    outline: none;
-}
 
-.settings-textarea {
-    width: 100%;
-    box-sizing: border-box;
-    background-color: var(--win95-window);
-    color: var(--win95-text);
-    border: none;
-    box-shadow: var(--bevel-sunken);
-    padding: 6px 8px;
-    font-size: 12px;
-    line-height: 1.45;
-    resize: vertical;
-    outline: none;
-}
 
 @media (max-width: 820px) {
     .settings-two-col {
@@ -2521,15 +2466,6 @@ button.active-depressed:active:not(:disabled) {
     margin-bottom: 14px;
 }
 
-.horse-trade-ticker {
-    background-color: #000000;
-    color: #00FF00;
-    box-shadow: var(--bevel-sunken);
-    padding: 6px 10px;
-    font-size: 11.5px;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
 
 .horse-trade-row {
     display: flex;
@@ -2630,7 +2566,13 @@ filter: none;
 filter: invert(1) brightness(0.92);
 }
 
-:root[data-scheme="contrast"]:not([data-wstyle="macos8"]) button.utility-icon-btn img {
+/* Bottom-bar icons follow the same rule: black on light schemes, light on dark schemes. */
+:root:is([data-scheme="dark"],[data-scheme="midnight"],[data-scheme="obsidian"],[data-scheme="nord"],[data-scheme="amethyst"],[data-scheme="forest"],[data-scheme="darkcherry"],[data-scheme="exusiainight"],[data-scheme="amber"],[data-scheme="greenterm"],[data-scheme="twilight"],[data-scheme="solarized"],[data-scheme="kopi"],[data-scheme="contrast"]):not([data-wstyle="macos8"]) #mobile-bottom-nav .mbn-icon {
+filter: invert(1) brightness(0.92);
+}
+
+:root[data-scheme="contrast"]:not([data-wstyle="macos8"]) button.utility-icon-btn img,
+:root[data-scheme="contrast"]:not([data-wstyle="macos8"]) #mobile-bottom-nav .mbn-icon {
 filter: invert(1);
 }
 
@@ -3313,63 +3255,15 @@ button.ucn-cc-rank-btn.rank-btn-3.is-selected {
 }
 
 /* Category header: a normal Win95 push button, sunken while its group is open */
-button.ucn-group-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin: 8px 0 4px 0;
-    font-weight: bold;
-    color: var(--win95-accent);
-}
 
-button.ucn-group-head .ucn-caret {
-    display: inline-block;
-    width: 24px;
-    font-family: "Courier New", "Lucida Console", monospace !important;
-}
 
-button.ucn-group-head .ucn-gsum {
-    font-size: 11px;
-    font-weight: normal;
-    color: var(--win95-text-dim);
-}
 
-.ucn-group-body {
-    margin-bottom: 8px;
-}
 
-.ucn-group-body[hidden] {
-    display: none;
-}
 
-.ucn-row {
-    background-color: var(--win95-well);
-    box-shadow: var(--bevel-status-well);
-    padding: 6px 8px;
-    margin-bottom: 4px;
-}
 
-.ucn-row-head {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-}
 
-.ucn-row-desc {
-    font-size: 11px;
-    color: var(--win95-text-dim);
-    margin: 2px 0 4px 0;
-}
 
-.ucn-row input[type=range] {
-    width: calc(100% - 16px);
-}
 
-.ucn-row-effect {
-    font-size: 11px;
-    color: var(--tone-bad);
-}
 
 .ucn-forecast {
     text-align: center;
@@ -3532,4 +3426,168 @@ button.ucn-group-head .ucn-gsum {
     .settings-inspired-grid {
         grid-template-columns: 1fr;
     }
+}
+/* ========================================== */
+/* --- MOBILE TOUCH UX (phones / tablets)  --- */
+/* ========================================== */
+#mobile-bottom-nav { display: none; }
+.fx-layer { height: 100dvh; }
+
+@media (max-width: 820px) {
+    html { -webkit-text-size-adjust: 100%; }
+    body { touch-action: manipulation; }
+    button, select, summary, .action-image-card, .utility-icon-btn, .mpr-tab-btn { touch-action: manipulation; }
+
+    /* Bottom navigation bar: replaces the hidden Win95 taskbar and stays in thumb reach */
+    #mobile-bottom-nav.active {
+        display: flex;
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 9400;
+        gap: 4px;
+        padding: 4px calc(4px + env(safe-area-inset-right)) calc(4px + env(safe-area-inset-bottom)) calc(4px + env(safe-area-inset-left));
+        background-color: var(--win95-bg);
+        box-shadow: inset 0 1px 0 var(--win95-surface), inset 0 2px 0 var(--win95-white);
+    }
+    #mobile-bottom-nav button {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
+        min-height: 48px;
+        margin: 0;
+        padding: 4px 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        font-size: 11px !important;
+        text-align: center !important;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    #mobile-bottom-nav .mbn-icon { width: 20px; height: 20px; object-fit: contain; pointer-events: none; }
+    #mobile-bottom-nav button:disabled { opacity: 0.45; }
+    body.has-mobile-nav { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+    body.has-mobile-nav #achievement-toast { bottom: calc(68px + env(safe-area-inset-bottom)) !important; }
+
+    /* Sticky status bar clears the notch; its sheet fits the visible viewport */
+    #mobile-status-bar.active { padding-top: env(safe-area-inset-top); }
+    #mobile-status-bar #msb-toggle { min-height: 44px; font-size: 13px !important; }
+    #msb-sheet { max-height: 70dvh; }
+    #msb-sheet .msb-row { font-size: 14px; padding: 8px; }
+
+    /* Touch targets and text size */
+    #main-panel button:not(.win95-close-btn),
+    #left-panel button:not(.utility-icon-btn):not(.win95-close-btn),
+    #custom-alert-btn {
+        min-height: 44px;
+        font-size: 14px;
+    }
+    #main-panel select, #left-panel select, input[type="text"], input[type="search"], textarea { min-height: 44px; font-size: 16px !important; }
+    #main-panel button + button { margin-top: 4px; }
+    .utility-icon-btn { min-width: 44px; min-height: 44px; }
+    .mpr-tab-btn { min-height: 44px; }
+    input[type="range"] { min-height: 32px; }
+
+    /* Alerts become bottom sheets sized to the visible viewport, with a comfortable close button */
+    #custom-alert-overlay { height: 100dvh; align-items: flex-end; padding-bottom: env(safe-area-inset-bottom); }
+    #custom-alert-box { width: 100%; max-width: 100%; box-sizing: border-box; }
+    #custom-alert-message { max-height: calc(80dvh - 110px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    #custom-alert-box .win95-close-btn {
+        width: 32px !important;
+        height: 26px !important;
+        min-width: 32px !important;
+        min-height: 26px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* --- More mobile polish --- */
+:focus-visible { outline: 2px solid var(--win95-navy); outline-offset: 2px; }
+
+@media (max-width: 820px) {
+    html { -webkit-tap-highlight-color: transparent; }
+    body { overscroll-behavior-y: contain; }
+
+    /* Category tabs (routine actions / decrees): one swipeable row that stays under the status bar */
+    .category-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        position: sticky;
+        top: var(--msb-h, 0px);
+        z-index: 8000;
+        background-color: var(--win95-surface);
+        padding: 4px !important;
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+    .category-tabs button { flex: 0 0 auto; margin: 0 !important; white-space: nowrap; }
+
+    /* Wide tables and the roll-call board scroll sideways inside their box instead of stretching the page */
+    .tally-box { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    #main-panel img { max-width: 100%; }
+    #main-panel { overflow-wrap: break-word; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
+/* --- Golkar A-B-G pillars (placeholder emblem on the Golkar interaction screens) --- */
+.golkar-pillars {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 6px 0 14px;
+}
+.golkar-pillar-letter {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 64px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 72px;
+    text-align: center;
+    color: #E8B923;
+    text-shadow: 1px 1px 0 #7A5A00, -1px -1px 0 #7A5A00, 1px -1px 0 #7A5A00, -1px 1px 0 #7A5A00, 0 3px 6px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.12s ease, opacity 0.2s ease;
+}
+.golkar-pillar-letter:hover { transform: translateY(-2px); }
+.golkar-pillar-letter.is-selected { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
+.golkar-pillar-letter.is-broken { opacity: 0.3; }
+.golkar-pillar-detail {
+    margin: 0 0 14px;
+    padding: 2px;
+    background-color: var(--win95-bg);
+    box-shadow: var(--bevel-window);
+    text-align: left;
+}
+.golkar-pillar-titlebar {
+    background: linear-gradient(90deg, var(--win95-navy) 0%, var(--win95-blue-grad) 100%);
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 8px;
+    letter-spacing: 0.4px;
+    text-shadow: 1px 1px 0 #000000;
+}
+.golkar-pillar-body {
+    margin-top: 2px;
+    padding: 8px 10px;
+    background-color: var(--win95-surface);
+    box-shadow: var(--bevel-status-well);
+    font-size: 13px;
+    line-height: 1.5;
+}
+@media (max-width: 420px) {
+    .golkar-pillars { gap: 10px; }
+    .golkar-pillar-letter { font-size: 52px; min-width: 60px; }
 }

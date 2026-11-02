@@ -1,5 +1,23 @@
 [
   {
+    "version": "0.2.1",
+    "date": "2 November 2026",
+    "title": "Beta 0.2.1 Hotfix",
+    "notes": [
+      "This update adds an experimental Golkar interaction, reworked mobile UI interface and fixes a long list of gameplay bugs, mismatched achievements and leftover code.",
+
+      "<b>NEW CONTENT</b><ul><ul><li>The Golkar faction screens now show three large letters, <b>A</b> (ABRI), <b>B</b> (Bureaucracy) and <b>G</b> (Golkar). Tap a letter to read about it and which decree breaks it.</li></ul></ul>",
+
+      "<b>NEW CAMPAIGN:</b><ul><ul><li>After choosing a difficulty, <i>The Current Situation</i> now asks whether you want the full briefing (<i>\"I want to learn what happened!!\"</i>) or to start immediately (<i>\"Just let me play!\"</i>)</li></ul></ul>",
+
+      "<b>MOBILE</b><ul><ul><li>A whole assortment of fixes and improvements..</li></ul></ul>",
+
+      "<b>GAMEPLAY FIXES</b><ul><ul><li><b>FINAL APPEALS:</b> They now open on the Accountability Speech and the Night of the Long Knives, instead of being tied to the final turn, which has no action phase. <i>Halo, Halo Senayan</i> now needs two Final Appeals, the most a run can use.</li><li><b>VICTORY:</b> Winning the vote now always requires <b>351 of 700</b> votes, even when factions were banned.</li><li><b>MILITARY:</b> An effect that listed both <i>mil</i> and <i>abri</i> no longer applies both (no longer applies 2x the effect)</li><li><b>DECREES:</b> Mutually exclusive decrees now block each other in both directions.</li><li><b>ACHIEVEMENTS:</b> <i>Voice of the People</i> now unlocks at the \"Tolerated\" popularity tier it names.</li></ul></ul>",
+
+      "<b>FIXES:</b> Fixed the music player not looping when only one track is available in a genre, and a misspelled style name on the vote result paper. Removed legacy codes.</li></ul></ul>"
+    ]
+  },
+  {
   "version": "0.2 <i>\"Rekayasa Politik\"</i>",
   "date": "30 October 2026",
   "title": "Beta 0.2 \"Rekayasa Politik\"",

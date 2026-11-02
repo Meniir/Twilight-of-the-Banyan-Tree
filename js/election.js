@@ -148,7 +148,7 @@ function buildTapMprDocumentHTML(accepted, forVotes, againstVotes, blankVotes) {
 
     return `<div class="tap-mpr-document">
         <div class="tap-mpr-header">
-            <img src="photo/pancasila.png" alt="${escapeAttr(LOC('tap.garuda_alt'))}" style="width: 96px; height: auto; display: block; margin: 0 auto 8px auto;" onerror="this.style.display='none'">
+            <img src="photo/pancasila.png" alt="${escapeHtml(LOC('tap.garuda_alt'))}" style="width: 96px; height: auto; display: block; margin: 0 auto 8px auto;" onerror="this.style.display='none'">
             <div style="font-size: 13px; font-weight: bold; letter-spacing: 0.5px;">${LOC('tap.org')}</div>
             <div style="font-size: 12px; font-weight: bold; margin-top: 26px;">${LOC('tap.decree_title')}</div>
             <div style="font-size: 11px; font-weight: bold; margin-top: 13px;">${LOC('tap.concerning')}</div>
@@ -169,7 +169,7 @@ function buildTapMprDocumentHTML(accepted, forVotes, againstVotes, blankVotes) {
             <div style="text-align: center; font-weight: bold; margin: 10px 0 6px 0; letter-spacing: 0.5px;">${LOC('tap.decides')}</div>
             <p style="margin: 4px 0;">${LOC('tap.to_enact')}</p>
 
-            <div class="tap-mpr-article-bo">
+            <div class="tap-mpr-article-box">
                 <div style="text-align: center; font-weight: bold; margin-bottom: 4px;">${LOC('tap.article1_heading')}</div>
                 <div>${LOC('tap.article1', { VERDICT: verdictHTML })}</div>
                 <div style="text-align: center; font-weight: bold; margin-top: 8px; margin-bottom: 2px;">${LOC('tap.article2_heading')}</div>
@@ -228,7 +228,7 @@ function runElection() {
         const favorBonus = unspentFavor * 8;
 
         let wildcard = 0;
-        if (Math.random() < ELECTION_DRAMA.wildcardChance) {
+        if (Math.random() < Math.min(1, ELECTION_DRAMA.wildcardChance)) {
             const span = ELECTION_DRAMA.wildcardMax - ELECTION_DRAMA.wildcardMin + 1;
             wildcard = (ELECTION_DRAMA.wildcardMin + Math.floor(Math.random() * span)) * (Math.random() < 0.5 ? 1 : -1);
         }
@@ -342,7 +342,7 @@ function runElection() {
     html += '<div id="tug-for" class="mpr-tug-for" style="width: 0%;"></div>';
     html += '<div id="tug-blank" class="mpr-tug-blank" style="width: 0%;"></div>';
     html += '<div id="tug-against" class="mpr-tug-against" style="width: 0%;"></div>';
-    html += '<div class="mpr-majority-marker" title="' + escapeAttr(LOC('election.majority_marker')) + '"></div>';
+    html += '<div class="mpr-majority-marker" title="' + escapeHtml(LOC('election.majority_marker')) + '"></div>';
     html += '</div>';
 
     html += '<div id="mpr-hemicycle" class="mpr-hemicycle-wrap">';
@@ -526,7 +526,7 @@ function runElection() {
             if (stats.pop < 15) unlockAchievement('sinetron_villain');
             if (!Object.keys(activeDecrees).some(id => activeDecrees[id])) unlockAchievement('presiden_rebahan');
             if (typeof recordDifficultyWin === 'function' && recordDifficultyWin(selectedDifficulty)) unlockAchievement('khatam');
-            if (window.UCN && UCN.runMaxed()) unlockAchievement(UCN.ACH_ID);
+            if (window.SSS && SSS.runMaxed()) unlockAchievement(SSS.ACH_ID);
             if (
                 factions['poros_tengah'] && factions['poros_tengah'].affinity >= 85 &&
                 factions['utusan_golongan'] && factions['utusan_golongan'].affinity >= 80 &&
@@ -570,7 +570,7 @@ function runElection() {
             const winImg = (gameConfig && gameConfig.victoryImage) ? gameConfig.victoryImage : 'photo/victory.png';
             resHTML += `<center><h1 style="color:#008000; margin-bottom: 5px;">${LOC('election.result_heading', { TITLE: title, FOR: grandTotalFor, AGAINST: grandTotalAgainst })}</h1></center>
                 <p align="center" style="font-family: MS Sans Serif; font-size: 13px; line-height: 1.5;">${desc}</p>
-                <center><span class="glass-frame glass-top"><img src="${winImg}" class="content-image" style="width: 400px; height: 200px; object-fit: cover; border: 3px inset #FFFFFF; background-color: #A9A9A9; margin-top: 10px; margin-bottom: 15px;" alt="${escapeAttr(LOC('election.victory_alt'))}"></span></center>`;
+                <center><span class="glass-frame glass-top"><img src="${winImg}" class="content-image" style="width: 400px; height: 200px; object-fit: cover; border: 3px inset #FFFFFF; background-color: #A9A9A9; margin-top: 10px; margin-bottom: 15px;" alt="${escapeHtml(LOC('election.victory_alt'))}"></span></center>`;
         } else {
             if (typeof getGovStabilityTier === 'function' && ['secure', 'stable'].includes(getGovStabilityTier().id)) unlockAchievement('dipecat_dengan_hormat');
             if (grandTotalFor >= 318 && grandTotalFor <= 326) {
@@ -610,7 +610,7 @@ function runElection() {
             const loseImg = (gameConfig && gameConfig.defeatImage) ? gameConfig.defeatImage : 'photo/defeat.png';
             resHTML += `<center><h1 style="color:#FF0000; margin-bottom: 5px;">${LOC('election.result_heading', { TITLE: title, FOR: grandTotalFor, AGAINST: grandTotalAgainst })}</h1></center>
                 <p align="center" style="font-family: MS Sans Serif; font-size: 13px; line-height: 1.5;">${desc}</p>
-                <center><span class="glass-frame glass-top"><img src="${loseImg}" class="content-image" style="width: 400px; height: 200px; object-fit: cover; border: 3px inset #FFFFFF; background-color: #A9A9A9; margin-top: 10px; margin-bottom: 15px;" alt="${escapeAttr(LOC('election.defeat_alt'))}"></span></center>`;
+                <center><span class="glass-frame glass-top"><img src="${loseImg}" class="content-image" style="width: 400px; height: 200px; object-fit: cover; border: 3px inset #FFFFFF; background-color: #A9A9A9; margin-top: 10px; margin-bottom: 15px;" alt="${escapeHtml(LOC('election.defeat_alt'))}"></span></center>`;
         }
 
         resHTML += buildTapMprDocumentHTML(accepted, grandTotalFor, grandTotalAgainst, grandTotalBlank);
@@ -869,10 +869,10 @@ const EPILOGUE_SECTIONS = ['end'].map(id => ({
 // Epilogue image block
 function buildEpilogueImageHTML(sec) {
     const src = (gameConfig && gameConfig.epilogueImages && gameConfig.epilogueImages[sec.id]) || `photo/epilogue/epilogue_${sec.id}.png`;
-    const cap = escapeAttr(sec.caption);
+    const cap = escapeHtml(sec.caption);
     return `<center><div style="position: relative; width: 100%; max-width: 880px; aspect-ratio: 2 / 1; max-height: 440px; box-sizing: border-box; border: 3px inset #FFFFFF; background-color: #A9A9A9; margin-bottom: 15px; overflow: hidden;">
         <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; color: #555; padding: 6px;">${LOC('dash.photo_placeholder', { NAME: cap })}</span>
-        <img src="${escapeAttr(src)}" alt="${cap}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+        <img src="${escapeHtml(src)}" alt="${cap}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
     </div></center>`;
 }
 

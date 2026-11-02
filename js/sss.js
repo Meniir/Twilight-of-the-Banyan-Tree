@@ -281,7 +281,7 @@
         if (!gameConfig.difficultySettings.ucn) {
             gameConfig.difficultySettings.ucn = { name: modeDisplayName(), description: '' };
         }
-        const live = window.ucnActive ? window.ucnActive.levels : settings.levels;
+        const live = window.sssActive ? window.sssActive.levels : settings.levels;
         const keep = gameConfig.difficultySettings.ucn;
         const def = buildDef(live);
         def.image = keep.image;
@@ -295,7 +295,7 @@
     function startRun() {
         closeModal();
         enforcePrerequisites(settings.levels);
-        window.ucnActive = { levels: Object.assign({}, settings.levels), hideForecast: settings.hideForecast };
+        window.sssActive = { levels: Object.assign({}, settings.levels), hideForecast: settings.hideForecast };
         ensureDef();
         if (settings.hideForecast) showOptionEffects = false;
     }
@@ -303,20 +303,20 @@
     // Called when a saved campaign is restored.
     function restoreRun(saved) {
         if (saved && saved.levels) {
-            window.ucnActive = sanitize(saved);
+            window.sssActive = sanitize(saved);
             ensureDef();
         }
     }
 
     // True if the running campaign has every card at or above the given level.
     function runAtLeast(level) {
-        return selectedDifficulty === 'ucn' && !!window.ucnActive && !!window.ucnActive.levels &&
-            SLIDERS.every(s => Number(window.ucnActive.levels[s.id]) >= level);
+        return selectedDifficulty === 'ucn' && !!window.sssActive && !!window.sssActive.levels &&
+            SLIDERS.every(s => Number(window.sssActive.levels[s.id]) >= level);
     }
 
     // True if the running campaign has every card at the maximum.
     function runMaxed() {
-        return selectedDifficulty === 'ucn' && !!window.ucnActive && levelsAllMax(window.ucnActive.levels);
+        return selectedDifficulty === 'ucn' && !!window.sssActive && levelsAllMax(window.sssActive.levels);
     }
 
     // ---- Card Effect & Prerequisite Text ----
@@ -552,10 +552,10 @@
         ].map(b => {
             const sel = (rk === b.r && isOpen) ? 'is-selected' : '';
             const dis = !isOpen ? 'disabled' : '';
-            return `<button type="button" class="ucn-cc-rank-btn rank-btn-${b.r} ${sel}" ${dis} onclick="UCN.pickRank('${s.id}', ${b.lv}, event)">${b.lbl}</button>`;
+            return `<button type="button" class="ucn-cc-rank-btn rank-btn-${b.r} ${sel}" ${dis} onclick="SSS.pickRank('${s.id}', ${b.lv}, event)">${b.lbl}</button>`;
         }).join('');
 
-        return `<div id="ucn-card-${s.id}" class="ucn-cc-card ${stateCls}" style="left:${pos.x}px; top:${pos.y}px; width:${CARD_W}px; height:${CARD_H}px;" onmouseenter="UCN.hoverCard('${s.id}')" onmouseleave="UCN.unhoverCard('${s.id}')" onclick="UCN.cardClick('${s.id}', event)">
+        return `<div id="ucn-card-${s.id}" class="ucn-cc-card ${stateCls}" style="left:${pos.x}px; top:${pos.y}px; width:${CARD_W}px; height:${CARD_H}px;" onmouseenter="SSS.hoverCard('${s.id}')" onmouseleave="SSS.unhoverCard('${s.id}')" onclick="SSS.cardClick('${s.id}', event)">
             <div class="ucn-cc-card-titlebar">
                 <span class="ucn-cc-card-code">SSS-${String(SLIDERS.indexOf(s) + 1).padStart(2, '0')}</span>
                 <span id="ucn-badge-${s.id}" class="ucn-cc-card-badge">${rankBadgeText(rk, isOpen)}</span>
@@ -852,17 +852,17 @@
         let h = '<div class="ucn-cc-window" onclick="event.stopPropagation()">';
         h += '<div class="ucn-cc-window-titlebar">';
         h += '<span>' + LOC('ucn.panel.title') + '</span>';
-        h += '<button type="button" class="win95-close-btn" onclick="UCN.closeModal()" title="Close">&#10005;</button>';
+        h += '<button type="button" class="win95-close-btn" onclick="SSS.closeModal()" title="Close">&#10005;</button>';
         h += '</div>';
 
         h += '<div class="ucn-cc-window-top">';
         h += '<div class="ucn-presets">';
-        h += '<button type="button" onclick="UCN.preset(0)">' + LOC('ucn.preset.zero') + '</button>';
-        h += '<button type="button" onclick="UCN.preset(10)">' + LOC('ucn.preset.historical') + '</button>';
-        h += '<button type="button" class="ucn-preset-max" onclick="UCN.preset(20)">' + LOC('ucn.preset.max') + '</button>';
-        h += '<button type="button" onclick="UCN.preset(-1)">' + LOC('ucn.preset.random') + '</button>';
-        h += '<button type="button" id="ucn-zoom-btn" class="' + (settings.zoomOut ? 'is-selected' : '') + '" onclick="UCN.toggleZoom()">' + locOr('ucn.cc.zoom_btn', 'Overview (75%)') + '</button>';
-        h += '<button type="button" onclick="UCN.resetView()">' + locOr('ucn.cc.reset_view', 'Reset View') + '</button>';
+        h += '<button type="button" onclick="SSS.preset(0)">' + LOC('ucn.preset.zero') + '</button>';
+        h += '<button type="button" onclick="SSS.preset(10)">' + LOC('ucn.preset.historical') + '</button>';
+        h += '<button type="button" class="ucn-preset-max" onclick="SSS.preset(20)">' + LOC('ucn.preset.max') + '</button>';
+        h += '<button type="button" onclick="SSS.preset(-1)">' + LOC('ucn.preset.random') + '</button>';
+        h += '<button type="button" id="ucn-zoom-btn" class="' + (settings.zoomOut ? 'is-selected' : '') + '" onclick="SSS.toggleZoom()">' + locOr('ucn.cc.zoom_btn', 'Overview (75%)') + '</button>';
+        h += '<button type="button" onclick="SSS.resetView()">' + locOr('ucn.cc.reset_view', 'Reset View') + '</button>';
         h += '</div>';
         h += '<div id="ucn-banner" class="ucn-banner' + (levelsAllMax(settings.levels) ? ' is-maxed' : '') + '">' + bannerHTML() + '</div>';
         h += '<div class="ucn-cc-toolbar-hint">' + dragHint + '</div>';
@@ -878,10 +878,10 @@
 
         h += '<div class="ucn-cc-window-footer">';
         h += '<label class="ucn-cc-forecast-label"><input type="checkbox" id="ucn-hide-forecast" ' +
-            (settings.hideForecast ? 'checked' : '') + ' onchange="UCN.toggleForecast(this.checked)"> ' + LOC('ucn.hide_forecast') + '</label>';
+            (settings.hideForecast ? 'checked' : '') + ' onchange="SSS.toggleForecast(this.checked)"> ' + LOC('ucn.hide_forecast') + '</label>';
         h += '<div class="ucn-cc-footer-btns">';
-        h += '<button type="button" class="ucn-cc-confirm-btn" onclick="UCN.closeModal()">' + confirmLbl + '</button>';
-        h += '<button type="button" class="ucn-cc-proceed-btn" onclick="UCN.proceedToSituation()">' + continueLbl + '</button>';
+        h += '<button type="button" class="ucn-cc-confirm-btn" onclick="SSS.closeModal()">' + confirmLbl + '</button>';
+        h += '<button type="button" class="ucn-cc-proceed-btn" onclick="SSS.proceedToSituation()">' + continueLbl + '</button>';
         h += '</div>';
         h += '</div>';
         h += '</div>';
@@ -942,9 +942,9 @@
 
         let h = '<div class="ucn-panel ucn-cc-inline-summary">';
         h += '<div id="ucn-inline-banner" class="ucn-banner' + (levelsAllMax(settings.levels) ? ' is-maxed' : '') + '">' + bannerHTML() + '</div>';
-        h += '<center><button type="button" class="ucn-open-board-btn" onclick="UCN.openModal()">' + openBtnLbl + '</button></center>';
+        h += '<center><button type="button" class="ucn-open-board-btn" onclick="SSS.openModal()">' + openBtnLbl + '</button></center>';
         h += '<div class="ucn-forecast"><label style="cursor:pointer;"><input type="checkbox" id="ucn-inline-hide-forecast" ' +
-            (settings.hideForecast ? 'checked' : '') + ' onchange="UCN.toggleForecast(this.checked)"> ' + LOC('ucn.hide_forecast') + '</label></div>';
+            (settings.hideForecast ? 'checked' : '') + ' onchange="SSS.toggleForecast(this.checked)"> ' + LOC('ucn.hide_forecast') + '</label></div>';
         h += '</div>';
 
         if (openModalRequested) {
@@ -956,7 +956,7 @@
 
     function lockedHint() { showCustomAlert(LOC('ucn.locked.hint'), null); }
 
-    window.UCN = {
+    window.SSS = {
         sliders: SLIDERS, settings: () => settings,
         unlocked, buildDef, ensureDef, startRun, restoreRun, runMaxed, runAtLeast, levelsAllMax,
         lockedHint, renderPanel, openModal, closeModal, proceedToSituation,

@@ -180,6 +180,7 @@
   },
   {
     "id": "dissolve_golkar_old_guard",
+    "reqGolkarPillars": true,
     "category": "Politics",
     "text": "Disqualify Golkar's Old-Guard Caucus Over the Bank Bali Election Fraud",
     "baseCost": 80,
@@ -1035,6 +1036,7 @@
   },
   {
     "id": "unify_golkar_slipi",
+    "reqGolkarPillars": true,
     "category": "Politics",
     "text": "Reunify Golkar Under the DPP at Slipi",
     "baseCost": 60,

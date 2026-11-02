@@ -32,6 +32,10 @@
         width: var(--left-w);
         right: auto;
     }
+    html[data-left] #mobile-bottom-nav {
+        width: var(--left-w);
+        right: auto;
+    }
     html[data-left] #achievement-toast {
         left: 6px;
         right: auto;
@@ -54,7 +58,6 @@
         box-sizing: border-box;
     }
     html[data-left] .library-search-input,
-    html[data-left] .settings-select,
     html[data-left] #music-select {
         width: 100%;
         min-width: 0;

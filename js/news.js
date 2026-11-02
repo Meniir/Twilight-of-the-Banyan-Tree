@@ -483,7 +483,7 @@ window.showCustomAlert = function(msg, callback) {
         if (alertBox) alertBox.className = '';
         if (titleBar) {
             titleBar.style.display = 'flex';
-            titleBar.innerHTML = `<span>${LOC('news.dispatch_title')}</span><button type="button" class="win95-close-btn" onclick="closeCustomAlert()" title="${escapeAttr(LOC('news.close_tooltip'))}">&#10005;</button>`;
+            titleBar.innerHTML = `<span>${LOC('news.dispatch_title')}</span><button type="button" class="win95-close-btn" onclick="closeCustomAlert()" title="${escapeHtml(LOC('news.close_tooltip'))}">&#10005;</button>`;
         }
         if (defaultBtn) defaultBtn.style.display = 'block';
 

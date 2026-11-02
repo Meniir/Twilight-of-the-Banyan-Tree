@@ -3,7 +3,7 @@
 <head>
     <title>Twilight of the Banyan Tree</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <link rel="icon" href="photo/icon.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="css/default/styles.css">
     <link rel="stylesheet" type="text/css" href="css/news.css">
@@ -237,6 +237,15 @@
     </div>
 </div>
 
+<!-- MOBILE BOTTOM NAV (shown by mobile.js on narrow screens during a campaign; replaces the hidden taskbar) -->
+<nav id="mobile-bottom-nav" aria-label="Quick navigation" data-loc-aria="mobile.nav.label">
+    <button type="button" id="mbn-status" onclick="toggleMobileStatusSheet()" aria-expanded="false" aria-controls="msb-sheet"><img class="mbn-icon" src="photo/icons/burgermenu.png" alt="" draggable="false"><span data-loc="mobile.nav.status">Status</span></button>
+    <button type="button" onclick="showLibraryMenu()"><img class="mbn-icon" src="photo/icons/book.png" alt="" draggable="false"><span data-loc="mobile.nav.library">Library</span></button>
+    <button type="button" id="mbn-actions" onclick="openMobileActionHub()"><img class="mbn-icon" src="photo/icons/pen-action.png" alt="" draggable="false"><span data-loc="mobile.nav.actions">Actions</span></button>
+    <button type="button" onclick="showSettingsMenu()"><img class="mbn-icon" src="photo/icons/settings.png" alt="" draggable="false"><span data-loc="mobile.nav.settings">Settings</span></button>
+    <button type="button" onclick="scrollMainPanelToTop()"><img class="mbn-icon" src="photo/icons/uparrow.png" alt="" draggable="false"><span data-loc="mobile.nav.top">Top</span></button>
+</nav>
+
 <!-- WIN95 BOTTOM TASKBAR -->
 <div id="win95-taskbar">
     <button type="button" id="win95-start-btn" onclick="toggleWin95StartMenu(event)">
@@ -259,7 +268,7 @@
 <script type="text/javascript" src="js/achievements.js"></script>
 <script type="text/javascript" src="js/mobile.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
-<script type="text/javascript" src="js/ucn.js"></script>
+<script type="text/javascript" src="js/sss.js"></script>
 <script type="text/javascript" src="js/music.js"></script>
 <script type="text/javascript" src="js/oppositionAI/opposition.js"></script>
 <script type="text/javascript" src="js/oppositionAI/tni.js"></script>

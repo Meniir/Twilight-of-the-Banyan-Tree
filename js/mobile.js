@@ -2,7 +2,7 @@
 // touch tooltip notes and scroll-to-top that accounts for the sticky bar. Load order: before game.js.
 
 // Whether the left status panel is collapsed on mobile.
-window.mobileLeftPanelCollapsed = false;
+window.mobileLeftPanelCollapsed = window.innerWidth <= 820;
 
 // Adds the collapse/expand toggle button at the top of the left panel (once).
 function setupMobileLeftPanelToggle() {
@@ -36,6 +36,30 @@ function updateMobileToggleLabel() {
     }
 }
 
+// True when the Actions shortcut can safely jump to the action hub (a campaign is at its action phase and no roll call is animating).
+function canOpenMobileActionHub() {
+    return Boolean(gameStarted) && isActionPhase && currentTurn <= events.length && !window.activeTallyInterval;
+}
+
+// Shows or hides the bottom navigation bar and enables/disables its Actions shortcut; call whenever the game phase changes.
+function updateMobileBottomNav() {
+    const nav = document.getElementById('mobile-bottom-nav');
+    if (!nav) return;
+    const bar = document.getElementById('mobile-status-bar');
+    const on = Boolean(bar && bar.classList.contains('active'));
+    nav.classList.toggle('active', on);
+    document.body.classList.toggle('has-mobile-nav', on);
+    const actions = document.getElementById('mbn-actions');
+    if (actions) actions.disabled = !canOpenMobileActionHub();
+}
+
+// Bottom-bar Actions shortcut: returns to the action hub (routine actions, decrees, faction engagements).
+window.openMobileActionHub = function() {
+    if (!canOpenMobileActionHub()) return;
+    setMobileStatusSheetOpen(false);
+    showActionMenu();
+};
+
 // Metrics listed in the mobile status sheet (labels come from effect_name.<key>).
 const MOBILE_STATUS_METRICS = ['pop', 'mil', 'ref', 'econ', 'intl', 'stab', 'cendana'];
 
@@ -49,9 +73,12 @@ function updateMobileStatusBar() {
     bar.classList.toggle('active', visible);
     if (!visible) {
         setMobileStatusSheetOpen(false);
+        updateMobileBottomNav();
         return;
     }
 
+    // Sticky elements below the bar (category tabs) offset themselves by its height
+    document.documentElement.style.setProperty('--msb-h', bar.offsetHeight + 'px');
     document.getElementById('msb-pc').innerText = stats.PC;
     const govWord = getGovStabilityWord();
     const govEl = document.getElementById('msb-gov');
@@ -60,6 +87,7 @@ function updateMobileStatusBar() {
     document.getElementById('msb-turn').innerText = `${Math.min(currentTurn, events.length)}/${events.length}`;
 
     if (bar.classList.contains('open')) renderMobileStatusSheet();
+    updateMobileBottomNav();
 }
 
 // Fills the status sheet with the current metric values copied from the left panel.
@@ -82,6 +110,8 @@ function setMobileStatusSheetOpen(open) {
     bar.classList.toggle('open', open);
     const toggle = document.getElementById('msb-toggle');
     if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const navStatus = document.getElementById('mbn-status');
+    if (navStatus) navStatus.setAttribute('aria-expanded', open ? 'true' : 'false');
     const caret = document.getElementById('msb-caret');
     if (caret) caret.innerHTML = open ? '&#9650;' : '&#9660;';
     if (open) renderMobileStatusSheet();
@@ -96,7 +126,8 @@ window.toggleMobileStatusSheet = function() {
 // Closes the status sheet when tapping outside the bar.
 document.addEventListener('click', function(e) {
     const bar = document.getElementById('mobile-status-bar');
-    if (bar && bar.classList.contains('open') && !bar.contains(e.target)) {
+    const nav = document.getElementById('mobile-bottom-nav');
+    if (bar && bar.classList.contains('open') && !bar.contains(e.target) && !(nav && nav.contains(e.target))) {
         setMobileStatusSheetOpen(false);
     }
 });
