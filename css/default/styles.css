@@ -546,13 +546,25 @@ audio {
 /* Previous / Play-Pause / Next Controls Row */
 .music-controls-row {
     display: grid;
-    grid-template-columns: 38px 1fr 38px;
+    grid-template-columns: 38px 1fr 38px 50px;
     gap: 5px;
     width: 100%;
     box-sizing: border-box;
 }
 
 button.music-ctrl-btn {
+    --py: 6px;
+    --px: 4px;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label.weighted-shuffle {
+    font-size: 18px;
     --py: 6px;
     --px: 4px;
     width: 100% !important;

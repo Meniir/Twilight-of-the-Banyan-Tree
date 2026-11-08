@@ -1,10 +1,16 @@
 // SUMMARY: Controls the background music player: track list setup, square album cover art display,
-// Play/Pause, Next/Skip, Previous track, auto-advance on track end, seek bar, volume control and Settings toggle.
+// Play/Pause, Next/Skip, Previous track, auto-advance on track end, seek bar, volume control and Settings + Shuffle toggle.
 
 let currentTrackIndex = 0;
 let musicAutoStarted = false;
 let trackHistory = [];
 window.musicSeeking = false;
+
+let weightedShuffle = false;
+let highorder_lowreform = [];
+let highorder_highreform = [];
+let loworder_lowreform = [];
+let loworder_highreform = [];
 
 // Genres offered in the genre dropdown. A track picks its genre with "genre" in music.json; 'all' shows everything.
 const MUSIC_GENRES = ['all', 'national', 'critique', 'pop', 'international'];
@@ -95,9 +101,36 @@ function getRandomTrackIndex(excludeIdx) {
     if (list.length === 1) return list[0];
     let nextIdx = excludeIdx;
     while (nextIdx === excludeIdx) {
-        nextIdx = list[Math.floor(Math.random() * list.length)];
+        if(weightedShuffle){
+            nextIdx = getShuffledTrackIndex();
+        }else{
+            nextIdx = list[Math.floor(Math.random() * list.length)];
+        }
     }
+
     return nextIdx;
+}
+
+function getShuffledTrackIndex(){
+    let selectedlist = [];
+
+    //get selected list
+    if(stats.stab >= 50){
+        if(stats.ref >= 50){
+            selectedlist = highorder_highreform;
+        }else{
+            selectedlist = highorder_lowreform;
+        }
+    }else{
+        if(stats.ref >= 50){
+            selectedlist = loworder_highreform;
+        }else{
+            selectedlist = loworder_lowreform;
+        }
+    }
+
+    //get random index from selected list
+    return selectedlist[Math.floor(Math.random() * selectedlist.length)]
 }
 
 // Fills the genre dropdown (or just refreshes its labels after a language change)
@@ -141,6 +174,47 @@ function buildTrackSelect() {
         if (idx === currentTrackIndex) opt.selected = true;
         select.appendChild(opt);
     });
+}
+
+/* fills the weighted shuffle tracks from json
+    4 weighted tracks:
+    low reform, low order: subversive anti-order lama songs, military anthems/parades
+    low reform, high order: uplifting national songs, civilian/state-bureaucracy orde lama songs, some older pop songs(? honestly I go by vibes lmao)
+    high reform, low order: populist anti-government song, activist movement songs
+    high reform, high order: pop songs linked with reformasi era, uplifting national songs
+
+    some (mostly national) songs both uplifting/somber are in both high/low reform weighted tracks. I do NOT know what to do with international songs either.
+*/
+function buildShuffleList() {
+    (musicTracks || []).forEach((track, i) => {
+        if (track.weightedtrack == 'loworder'){
+            loworder_highreform.push(i);
+            loworder_lowreform.push(i);
+            return;
+        }
+        if (track.weightedtrack == 'highorder'){
+            highorder_highreform.push(i);
+            highorder_lowreform.push(i);
+            return;
+        }
+        if (track.weightedtrack == 'highorder_highreform'){
+            highorder_highreform.push(i);
+            return;
+        }
+        if (track.weightedtrack == 'highorder_lowreform'){
+            highorder_lowreform.push(i);
+            return;
+        }
+        if (track.weightedtrack == 'loworder_highreform'){
+            loworder_highreform.push(i);
+            return;
+        }
+        if (track.weightedtrack == 'loworder_lowreform'){
+            loworder_lowreform.push(i);
+            return;
+        }
+
+    })
 }
 
 // Switch to the genre chosen in the dropdown
@@ -264,6 +338,7 @@ function setupMusicPlayer() {
 
     buildGenreSelect();
     buildTrackSelect();
+    buildShuffleList();
 
     if (!window.volumeUserSet) audio.volume = 0.3;
     syncVolumeSliders();
@@ -396,5 +471,15 @@ window.updateVolume = function() {
         window.volumeUserSet = true;
         syncVolumeSliders();
         if (typeof saveUserSettings === 'function') saveUserSettings();
+    }
+};
+
+// Updates 
+window.toggleShuffle = function() {
+    const cb = document.getElementById('weighted-shuffle');
+    if (cb) {
+        weightedShuffle = cb.checked;        
+    }else{
+        weightedShuffle = false;
     }
 };

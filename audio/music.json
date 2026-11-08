@@ -3,61 +3,71 @@
     "title": "Wage Rudolf Supratman - Indonesia Raya (Instrumental)",
     "file": "audio/music/national_anthem_instrumental.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "loworder"
   },
   {
     "title": "Ibu Sud - Tanah Airku",
     "file": "audio/music/tanah_airku.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "highorder"
   },
   {
     "title": "Hendri Rotinsulu - Rayuan Pulau Kelapa",
     "file": "audio/music/rayuan_pulau_kelapa.mp3",
     "cover": "photo/music/hendri.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "highorder_lowreform"
   },
   {
     "title": "Hendri Rotinsulu - Indonesia Pusaka",
     "file": "audio/music/indonesia_pusaka.mp3",
     "cover": "photo/music/hendri.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "highorder"
   },
   {
     "title": "Cornel Simanjuntak - Sorak-Sorak Bergembira",
     "file": "audio/music/sorak_sorak_gembira.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "loworder"
   },
   {
     "title": "TNI - Tinggalkan Ayah Tinggalkan Ibu",
     "file": "audio/music/tinggalkan_ayah_tinggalkan_ibu.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "loworder_lowreform"
   },
   {
     "title": "Titiek Puspa - Bapak Pembangunan Indonesia",
     "file": "audio/music/bapak_pembangunan_indonesia.mp3",
     "cover": "photo/music/puspa.jpg",
-    "genre": "national"
+    "genre": "national",
+    "weightedtrack": "highorder_lowreform"
   },
   {
     "title": "Iwan Fals - Bongkar",
     "file": "audio/music/bongkar.mp3",
     "cover": "photo/music/swami.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_lowreform"
   },
   {
     "title": "Iwan Fals - Bento",
     "file": "audio/music/bento.mp3",
     "cover": "photo/music/swami.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_lowreform"
   },
   {
     "title": "Iwan Fals - Pesawat Tempurku",
     "file": "audio/music/pesawat_tempur.mp3",
     "cover": "photo/music/pesawattempur.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_lowreform"
   },
   {
     "title": "Iwan Fals - Serdadu",
@@ -69,121 +79,141 @@
     "title": "Franky Sahilatua - Bangsa Bayar Hutang",
     "file": "audio/music/bangsa_bayar_hutang.mp3",
     "cover": "photo/music/franky.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_highreform"
   },
   {
     "title": "Gombloh - Berita Cuaca",
     "file": "audio/music/berita_cuaca.mp3",
     "cover": "photo/music/gomblohberitacuaca.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder"
   },
   {
     "title": "Bimbo - Tante Sun",
     "file": "audio/music/tante_sun.mp3",
     "cover": "photo/music/bimbo.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_lowreform"
   },
   {
     "title": "Safi'i Kemamang - Buruh Tani Mahasiswa",
     "file": "audio/music/buruh_tani_mahasiswa.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_highreform"
   },
   {
     "title": "Mars Mahasiswa (Totalitas Perjuangan)",
     "file": "audio/music/mars_mahasiswa.mp3",
     "cover": "photo/music/placeholder.jpg",
-    "genre": "critique"
+    "genre": "critique",
+    "weightedtrack": "loworder_highreform"
   },
   {
     "title": "Chrisye - Cintaku",
     "file": "audio/music/cintaku.mp3",
     "cover": "photo/music/cintaku.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Chrisye - Hip Hip Hura",
     "file": "audio/music/hiphiphura.mp3",
     "cover": "photo/music/hiphiphura.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_lowreform"
   },
   {
     "title": "Chrisye - Anak Sekolah",
     "file": "audio/music/anaksekolah.mp3",
     "cover": "photo/music/anaksma.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Chrisye - Kala Cinta Menggoda",
     "file": "audio/music/kala_cinta.mp3",
     "cover": "photo/music/chrisye.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Fariz RM - Sakura",
     "file": "audio/music/sakura.mp3",
     "cover": "photo/music/farizsakura.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_lowreform"
   },
   {
     "title": "Fariz RM - Barcelona",
     "file": "audio/music/barcelona.mp3",
     "cover": "photo/music/barcelona.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_lowreform"
   },
   {
     "title": "Dewa 19 - Kangen",
     "file": "audio/music/kangen.mp3",
     "cover": "photo/music/dewa19.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Dewa 19 - Kirana",
     "file": "audio/music/kirana.mp3",
     "cover": "photo/music/dewa_kirana.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Dewa 19 - Kamulah Satu-Satunya",
     "file": "audio/music/kamulah_satu_satunya.mp3",
     "cover": "photo/music/dewa_kirana.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Potret - Bagaikan Langit",
     "file": "audio/music/bagaikanlangit.mp3",
     "cover": "photo/music/cafepotret.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Padi - Sobat",
     "file": "audio/music/sobat.mp3",
     "cover": "photo/music/padi.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Padi - Begitu Indah",
     "file": "audio/music/begitu_indah.mp3",
     "cover": "photo/music/padi.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Padi - Mahadewi",
     "file": "audio/music/mahadewi.mp3",
     "cover": "photo/music/padi.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Sheila on 7 - Dan...",
     "file": "audio/music/dan.mp3",
     "cover": "photo/music/sheila_on_7.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Sheila on 7 - Kita",
     "file": "audio/music/kita.mp3",
     "cover": "photo/music/sheila_on_7.jpg",
-    "genre": "pop"
+    "genre": "pop",
+    "weightedtrack": "highorder_highreform"
   },
   {
     "title": "Teresa Teng - 漫步人生路",
