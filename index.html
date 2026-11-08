@@ -119,6 +119,9 @@
                         <button type="button" id="prev-track-btn" class="music-ctrl-btn" onclick="prevMusic()" title="Previous Track" data-loc-title="music.prev">&#9198;</button>
                         <button type="button" id="play-pause-btn" class="music-ctrl-btn music-play-btn" onclick="toggleMusic()">&#9205; Play</button>
                         <button type="button" id="next-track-btn" class="music-ctrl-btn" onclick="nextMusic()" title="Next Track" data-loc-title="music.next">&#9197;</button>
+                        <label title="Weighted Shuffle" class="weighted-shuffle">
+                            <input type="checkbox" id="weighted-shuffle" onchange="toggleShuffle()">⤮
+                        </label>
                     </div>
                     <div class="music-seek-row">
                         <span id="music-time-cur">0:00</span>
